@@ -1,4 +1,4 @@
-package com.nesmelovalexey.corelib
+package com.nesmelovalexey.corelib.logger
 
 import android.util.Log
 

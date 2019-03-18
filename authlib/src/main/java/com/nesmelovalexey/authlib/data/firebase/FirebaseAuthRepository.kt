@@ -18,22 +18,14 @@ import io.reactivex.CompletableEmitter
  *
  * @author Alexey Nesmelov
  */
-class FirebaseAuthRepository : IAuthRepository {
+class FirebaseAuthRepository(private val auth: FirebaseAuth) : IAuthRepository {
 
-    companion object {
-        const val TAG = "FirebaseAuthRepository"
-    }
-
-    private val auth = FirebaseAuth.getInstance() // TODO dagger
-
-    // TODO find out the reason of warning
-    override fun register(email: String, password: String) = Completable.create {
+    override fun register(email: String, password: String): Completable = Completable.create {
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(AuthCompleteListener(it))
     }
 
-    // TODO find out the reason of warning
-    override fun signIn(email: String, password: String) = Completable.create {
+    override fun signIn(email: String, password: String) : Completable = Completable.create {
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(AuthCompleteListener(it))
     }
@@ -49,6 +41,10 @@ class FirebaseAuthRepository : IAuthRepository {
                 else -> emitter.onError(UnknownException())
             }
         }
+    }
+
+    companion object {
+        const val TAG = "FirebaseAuthRepository"
     }
 }
 
