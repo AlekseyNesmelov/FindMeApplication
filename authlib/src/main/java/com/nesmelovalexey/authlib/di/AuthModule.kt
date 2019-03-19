@@ -5,7 +5,6 @@ import com.nesmelovalexey.authlib.data.IAuthRepository
 import com.nesmelovalexey.authlib.data.firebase.FirebaseAuthRepository
 import com.nesmelovalexey.authlib.domain.AuthInteractor
 import com.nesmelovalexey.authlib.domain.IAuthInteractor
-import org.koin.dsl.module.Module
 import org.koin.dsl.module.module
 
 /**
@@ -17,7 +16,3 @@ val authModule = module {
     factory<IAuthInteractor> { AuthInteractor(get())}
 }
 
-/**
- * Authorization components
- */
-val authComponent: List<Module> = listOf(authModule)
