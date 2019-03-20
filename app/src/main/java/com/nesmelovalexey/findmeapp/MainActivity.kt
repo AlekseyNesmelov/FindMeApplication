@@ -2,6 +2,7 @@ package com.nesmelovalexey.findmeapp
 
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.fragment.app.FragmentActivity
 import com.nesmelovalexey.authlib.domain.IAuthInteractor
 import com.nesmelovalexey.userdatalib.data.IUserDataRepository
@@ -31,11 +32,13 @@ class MainActivity : FragmentActivity() {
                 Log.d("MainActivity", "onError", it)
             })*/
         interactor.signIn("70508010alex@mail.ru", "123ewq")
-            .andThen(usersRep.add("Alexey", "Nesmelov"))
+            .andThen(usersRep.add("70508010alex@mail.ru", "Alexey", "Nesmelov", null))
             .subscribe({
                 Log.d("MainActivity", "onComplete")
+                Toast.makeText(this, "Logged in", Toast.LENGTH_LONG).show()
             }, {
                 Log.d("MainActivity", "onError", it)
+                Toast.makeText(this, "Error", Toast.LENGTH_LONG).show()
             })
     }
 }

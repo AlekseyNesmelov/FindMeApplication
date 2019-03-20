@@ -12,8 +12,9 @@ interface IUserDataRepository {
     /**
      * Add new user to the database.
      *
+     * @param login user login
      * @param first user first name
      * @param last  user last name
      */
-    fun add(first: String, last: String) : Completable
+    fun add(login: String, first: String, last: String, photoUrl: String?) : Completable
 }

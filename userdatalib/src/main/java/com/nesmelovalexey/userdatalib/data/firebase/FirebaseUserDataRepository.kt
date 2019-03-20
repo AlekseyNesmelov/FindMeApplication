@@ -16,13 +16,16 @@ import io.reactivex.CompletableEmitter
  */
 class FirebaseUserDataRepository(private val dataBase : FirebaseFirestore) : IUserDataRepository {
 
-    override fun add(first: String, last: String) : Completable = Completable.create {
-        val user = HashMap<String, Any>()
-        user[PROP_FIRST_NAME] = first
-        user[PROP_LAST_NAME] = last
+    override fun add(login: String, first: String, last: String, photoUrl: String?) : Completable = Completable.create {
+        val user = mutableMapOf(
+            PROP_FIRST_NAME to first,
+            PROP_LAST_NAME to last
+        )
+        photoUrl?.let {user[PROP_PHOTO_URL] = photoUrl}
 
         dataBase.collection(COLLECTION_USERS)
-            .add(user)
+            .document(login)
+            .set(user)
             .addOnSuccessListener(UserDbSuccessListener(it))
             .addOnFailureListener(UserDbFailureListener(it))
     }
@@ -48,8 +51,10 @@ class FirebaseUserDataRepository(private val dataBase : FirebaseFirestore) : IUs
     companion object {
         const val TAG = "FirebaseUserDataRep"
 
+        const val PROP_LOGIN = "login"
         const val PROP_FIRST_NAME = "first"
         const val PROP_LAST_NAME = "last"
+        const val PROP_PHOTO_URL = "photoUrl"
 
         const val COLLECTION_USERS = "users"
     }
