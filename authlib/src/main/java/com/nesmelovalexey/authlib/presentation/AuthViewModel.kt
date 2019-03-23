@@ -1,13 +1,17 @@
 package com.nesmelovalexey.authlib.presentation
 
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.nesmelovalexey.authlib.domain.IAuthInteractor
 import com.nesmelovalexey.corelib.logger.Logger
+import com.nesmelovalexey.corelib.rx.disposables.RxDisposables
+import com.nesmelovalexey.corelib.rx.transformers.IRxTransformers
+import com.nesmelovalexey.corelib.viewmodel.BaseViewModel
 
-class AuthViewModel(private val authInteractor: IAuthInteractor,
-                    val email : MutableLiveData<String> = MutableLiveData(),
-                    val password: MutableLiveData<String> = MutableLiveData()) : ViewModel() {
+class AuthViewModel(val email : MutableLiveData<String> = MutableLiveData(),
+                    val password: MutableLiveData<String> = MutableLiveData(),
+                    private val authInteractor: IAuthInteractor,
+                    private val rxTransformers: IRxTransformers,
+                    private val rxDisposables: RxDisposables) : BaseViewModel(rxDisposables) {
 
     fun accept() {
         val emailValue = email.value
@@ -20,15 +24,19 @@ class AuthViewModel(private val authInteractor: IAuthInteractor,
             // TODO
             return
         }
-        // TODO
-        authInteractor.register(emailValue, passwordValue).subscribe(
-            {
-                Logger.d(TAG, "Registration has been completed successfully for email: $emailValue")
-            },
-            {
-                Logger.d(TAG, "Registration failed for email: $emailValue", it)
-            }
-        )
+        rxDisposables.container.add(
+            authInteractor.register(emailValue, passwordValue)
+                .compose(rxTransformers.ioToMain())
+                .subscribe(
+                    {
+                        // TODO
+                        Logger.d(TAG, "Registration has been completed successfully for email: $emailValue")
+                    },
+                    {
+                        // TODO
+                        Logger.d(TAG, "Registration failed for email: $emailValue", it)
+                    }
+                ))
     }
 
     companion object {

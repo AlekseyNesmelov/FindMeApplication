@@ -16,6 +16,6 @@ val authModule = module {
     single { FirebaseAuth.getInstance() }
     factory<IAuthRepository> { FirebaseAuthRepository(get()) }
     factory<IAuthInteractor> { AuthInteractor(get())}
-    viewModel { AuthViewModel(authInteractor = get()) }
+    viewModel { AuthViewModel(authInteractor = get(), rxDisposables = get(), rxTransformers = get()) }
 }
 
