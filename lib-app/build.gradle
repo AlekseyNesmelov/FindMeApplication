@@ -44,9 +44,9 @@ dependencies {
     implementation 'org.koin:koin-android:2.0.0-beta-4'
     implementation 'org.koin:koin-androidx-viewmodel:2.0.0-beta-4'
 
-    implementation project(path: ':corelib')
-    implementation project(path: ':authlib')
-    implementation project(path: ':userdatalib')
+    implementation project(path: ':lib-core')
+    implementation project(path: ':lib-auth')
+    implementation project(path: ':lib-userdata')
 
     implementation 'com.android.support:multidex:1.0.3'
 }
