@@ -1,1 +1,13 @@
-<manifest package="com.nesmelovalexey.authlib"/>
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="com.nesmelovalexey.authlib">
+
+    <application>
+        <activity
+            android:name=".ui.AuthActivity"
+            android:label="@string/title_activity_login"
+            android:theme="@style/AppTheme">
+        </activity>
+    </application>
+
+</manifest>

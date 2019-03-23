@@ -3,15 +3,21 @@ package com.nesmelovalexey.findmeapp
 import androidx.multidex.MultiDexApplication
 import com.nesmelovalexey.authlib.di.authModule
 import com.nesmelovalexey.userdatalib.di.userDataModule
-import org.koin.android.ext.android.startKoin
-import org.koin.dsl.module.Module
+import org.koin.android.ext.koin.androidContext
+import org.koin.android.ext.koin.androidLogger
+import org.koin.core.context.startKoin
+import org.koin.core.module.Module
 
 class FindMeApp : MultiDexApplication() {
 
-    private val appComponent: List<Module> = listOf(userDataModule, authModule)
+    private val appModule: List<Module> = listOf<Module>(userDataModule, authModule)
 
     override fun onCreate() {
         super.onCreate()
-        startKoin(this, appComponent)
+        startKoin{
+            androidLogger()
+            androidContext(this@FindMeApp)
+            modules(appModule)
+        }
     }
 }

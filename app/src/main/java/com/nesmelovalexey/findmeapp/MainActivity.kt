@@ -1,10 +1,9 @@
 package com.nesmelovalexey.findmeapp
 
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import android.widget.Toast
 import androidx.fragment.app.FragmentActivity
-import com.nesmelovalexey.authlib.domain.IAuthInteractor
+import com.nesmelovalexey.authlib.ui.AuthActivity
 import com.nesmelovalexey.userdatalib.data.IUserDataRepository
 import org.koin.android.ext.android.inject
 
@@ -16,29 +15,13 @@ import org.koin.android.ext.android.inject
  */
 class MainActivity : FragmentActivity() {
 
-    // TODO it is just a test
-    private val interactor: IAuthInteractor by inject()
     private val usersRep: IUserDataRepository by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
 
-        // TODO it is just a test
-        /*interactor.register("70508010alex@mail.ru", "123ewq")
-            .subscribe({
-                Log.d("MainActivity", "onComplete")
-            }, {
-                Log.d("MainActivity", "onError", it)
-            })*/
-        interactor.signIn("70508010alex@mail.ru", "123ewq")
-            .andThen(usersRep.add("70508010alex@mail.ru", "Alexey", "Nesmelov", null))
-            .subscribe({
-                Log.d("MainActivity", "onComplete")
-                Toast.makeText(this, "Logged in", Toast.LENGTH_LONG).show()
-            }, {
-                Log.d("MainActivity", "onError", it)
-                Toast.makeText(this, "Error", Toast.LENGTH_LONG).show()
-            })
+        val intent = Intent(this, AuthActivity::class.java)
+        startActivity(intent)
     }
 }

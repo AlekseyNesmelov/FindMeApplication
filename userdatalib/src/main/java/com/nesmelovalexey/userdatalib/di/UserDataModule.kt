@@ -6,7 +6,7 @@ import com.nesmelovalexey.userdatalib.data.IUserDataRepository
 import com.nesmelovalexey.userdatalib.data.IUserPhotoRepository
 import com.nesmelovalexey.userdatalib.data.firebase.FirebaseUserDataRepository
 import com.nesmelovalexey.userdatalib.data.firebase.FirebaseUserPhotoRepository
-import org.koin.dsl.module.module
+import org.koin.dsl.module
 
 /**
  * User data module
