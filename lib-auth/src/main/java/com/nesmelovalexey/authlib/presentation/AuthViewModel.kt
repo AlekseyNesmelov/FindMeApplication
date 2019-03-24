@@ -7,11 +7,12 @@ import com.nesmelovalexey.corelib.rx.disposables.RxDisposables
 import com.nesmelovalexey.corelib.rx.transformers.IRxTransformers
 import com.nesmelovalexey.corelib.viewmodel.BaseViewModel
 
-class AuthViewModel(val email : MutableLiveData<String> = MutableLiveData(),
-                    val password: MutableLiveData<String> = MutableLiveData(),
-                    private val authInteractor: IAuthInteractor,
+class AuthViewModel(private val authInteractor: IAuthInteractor,
                     private val rxTransformers: IRxTransformers,
                     private val rxDisposables: RxDisposables) : BaseViewModel(rxDisposables) {
+
+    val email : MutableLiveData<String> = MutableLiveData()
+    val password: MutableLiveData<String> = MutableLiveData()
 
     fun accept() {
         val emailValue = email.value

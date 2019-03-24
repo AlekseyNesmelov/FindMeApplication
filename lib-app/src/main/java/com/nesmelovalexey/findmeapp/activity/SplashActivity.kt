@@ -1,9 +1,9 @@
-package com.nesmelovalexey.findmeapp
+package com.nesmelovalexey.findmeapp.activity
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.FragmentActivity
-import com.nesmelovalexey.authlib.ui.AuthActivity
+import com.nesmelovalexey.findmeapp.R
 
 /**
  * It is entry point of other screens of the application.
@@ -14,9 +14,14 @@ class SplashActivity : FragmentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.main_activity)
+        setContentView(R.layout.splash_activity)
 
-        val intent = Intent(this, AuthActivity::class.java)
+        // TODO
+        /*val intent = Intent(this, AuthActivity::class.java)
+        startActivity(intent)
+        finish()*/
+
+        val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
         finish()
     }

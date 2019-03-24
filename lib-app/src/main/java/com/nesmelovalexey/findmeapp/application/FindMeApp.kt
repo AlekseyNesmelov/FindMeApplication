@@ -1,4 +1,4 @@
-package com.nesmelovalexey.findmeapp
+package com.nesmelovalexey.findmeapp.application
 
 import androidx.multidex.MultiDexApplication
 import com.nesmelovalexey.authlib.di.authModule

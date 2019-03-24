@@ -1,1 +1,1 @@
-include ':lib-app', ':lib-auth', ':lib-core', ':lib-userdata'
+include ':lib-app', ':lib-auth', ':lib-core', ':lib-userdata', ':lib-map'
